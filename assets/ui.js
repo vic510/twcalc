@@ -22,6 +22,13 @@
       try { localStorage.setItem(KEY, next); } catch (e) {}
       paintToggle();
     });
+    // 沒手動選過就跟著系統深淺色變
+    const mq = matchMedia("(prefers-color-scheme: dark)");
+    mq.addEventListener("change", e => {
+      let saved = null;
+      try { saved = localStorage.getItem(KEY); } catch (err) {}
+      if (!saved) { root.dataset.theme = e.matches ? "dark" : "light"; paintToggle(); }
+    });
   });
 
   const UI = {

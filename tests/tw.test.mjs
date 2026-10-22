@@ -26,6 +26,8 @@ t("bonus under cap", () => assert.equal(TW.bonus(40100, 0, 100000).premium, 0));
 t("bonus over cap", () => { const r = TW.bonus(40100, 0, 200000); assert.equal(r.over, 200000 - 160400); assert.equal(r.premium, Math.round(39600 * 0.0211)); });
 t("bonus cumulative", () => { const r = TW.bonus(40100, 150000, 50000); assert.equal(r.over, 39600); });
 t("bonus already over", () => assert.equal(TW.bonus(40100, 200000, 10000).over, 10000));
+t("bonus tax start", () => { const r = TW.bonus(40100, 0, 90501); assert.equal(r.tax, 4525); assert.equal(TW.bonus(40100, 0, 90500).tax, 0); });
+t("bonus default net", () => { const r = TW.bonus(40100, 40000, 150000); assert.equal(r.premium, 625); assert.equal(r.tax, 7500); assert.equal(r.afterPremium, 149375); assert.equal(r.net, 141875); });
 
 t("rent corp 25,000", () => { const r = TW.rent(25000, { corporateTenant: true }); assert.equal(r.tax, 2500); assert.equal(r.premium, 528); assert.equal(r.net, 21972); assert.equal(r.taxableIncome, Math.round(300000 * 0.57)); });
 t("rent corp 20,000", () => { const r = TW.rent(20000, { corporateTenant: true }); assert.equal(r.tax, 0); assert.equal(r.premium, 422); });

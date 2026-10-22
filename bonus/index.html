@@ -3,22 +3,22 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>年終獎金補充保費試算｜twcalc 台灣試算</title>
-<meta name="description" content="年終、三節獎金會不會被扣二代健保補充保費？輸入投保金額與獎金，算出超過 4 倍門檻要扣多少。">
+<title>年終獎金實領試算｜twcalc 台灣試算</title>
+<meta name="description" content="年終、三節獎金會被扣多少？輸入投保金額與獎金，算出二代健保補充保費（超過 4 倍門檻）與 5% 預扣所得稅，看實際入帳金額。">
 <link rel="canonical" href="https://vic510.github.io/twcalc/bonus/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="年終獎金補充保費試算｜twcalc 台灣試算">
-<meta property="og:description" content="年終、三節獎金會不會被扣二代健保補充保費？輸入投保金額與獎金，算出超過 4 倍門檻要扣多少。">
+<meta property="og:title" content="年終獎金實領試算｜twcalc 台灣試算">
+<meta property="og:description" content="年終、三節獎金會被扣多少？輸入投保金額與獎金，算出二代健保補充保費（超過 4 倍門檻）與 5% 預扣所得稅，看實際入帳金額。">
 <meta property="og:url" content="https://vic510.github.io/twcalc/bonus/">
 <meta property="og:locale" content="zh_TW">
 <meta name="theme-color" content="#1B2B4B">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231B2B4B'/%3E%3Ctext x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='monospace'%3Etw%3C/text%3E%3C/svg%3E">
-<script>try{document.documentElement.dataset.theme=localStorage.getItem('twcalc-theme')||'light'}catch(e){document.documentElement.dataset.theme='light'}</script>
+<script>(function(){var t;try{t=localStorage.getItem('twcalc-theme')}catch(e){}if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.dataset.theme=t})()</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@700&family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="../assets/site.css">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "年終獎金補充保費試算", "url": "https://vic510.github.io/twcalc/bonus/", "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "inLanguage": "zh-Hant-TW", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TWD"}, "description": "年終、三節獎金會不會被扣二代健保補充保費？輸入投保金額與獎金，算出超過 4 倍門檻要扣多少。"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "年終獎金實領試算", "url": "https://vic510.github.io/twcalc/bonus/", "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "inLanguage": "zh-Hant-TW", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TWD"}, "description": "年終、三節獎金會被扣多少？輸入投保金額與獎金，算出二代健保補充保費（超過 4 倍門檻）與 5% 預扣所得稅，看實際入帳金額。"}</script>
 </head>
 <body>
 <div class="wrap">
@@ -28,8 +28,8 @@
 </nav>
   <header class="hero">
     <div class="eyebrow">年終・三節・績效獎金</div>
-    <h1><span class="nw">年終領三個月，</span><span class="nw">會被扣補充保費嗎？</span></h1>
-    <p class="lede">同一家公司發的獎金，全年累計超過<b>健保投保金額 4 倍</b>的部分，要扣 <b>2.11%</b> 補充保費。輸入投保金額和獎金，看這筆會扣多少。</p>
+    <h1><span class="nw">年終領三個月，</span><span class="nw">實際拿到多少？</span></h1>
+    <p class="lede">同一家公司發的獎金，全年累計超過<b>健保投保金額 4 倍</b>的部分，要扣 <b>2.11%</b> 補充保費；單次發放達 <b>90,501 元</b>還會先預扣 <b>5%</b> 所得稅。輸入投保金額和獎金，看這筆實際入帳多少。</p>
   </header>
 
   <div class="main">
@@ -58,15 +58,16 @@
 
     <div class="side">
       <div class="slip" aria-live="polite">
-        <div class="slip-head"><h2>獎金補充保費</h2><span class="code" id="slip-code"></span></div>
+        <div class="slip-head"><h2>獎金扣款明細</h2><span class="code" id="slip-code"></span></div>
         <div class="rows">
           <div class="row"><span class="k">本次獎金</span><span class="v" id="o-bonus"></span></div>
           <div class="row sub"><span class="k">全年免扣額度（投保金額 × 4）</span><span class="v" id="o-cap"></span></div>
           <div class="row sub"><span class="k">本次發放前剩餘額度</span><span class="v" id="o-room"></span></div>
           <div class="row sub"><span class="k">超過額度、要計費的部分</span><span class="v" id="o-over"></span></div>
           <div class="row minus"><span class="k">補充保費</span><span class="v" id="o-prem"></span><span class="why" id="o-why"></span></div>
+          <div class="row minus"><span class="k">預扣所得稅</span><span class="v" id="o-tax"></span><span class="why" id="o-tax-why"></span></div>
         </div>
-        <div class="net"><span class="netl"><span class="stamp" id="stamp" aria-hidden="true">實領</span><span class="k">扣保費後</span></span><span class="v" id="o-net"></span></div>
+        <div class="net"><span class="netl"><span class="stamp" id="stamp" aria-hidden="true">實領</span><span class="k">實際入帳</span></span><span class="v" id="o-net"></span></div>
       </div>
       <div class="alert" id="tip" hidden></div>
       <div class="actions">
@@ -88,7 +89,7 @@
     <div class="grid3">
       <div class="card"><h3>4 倍是「全年累計」</h3><p>不是每次各算 4 倍。年初發的三節獎金會先用掉額度，到了年終才一次超過。</p></div>
       <div class="card"><h3>看發放當月的投保金額</h3><p>門檻用「發獎金那個月」的健保投保金額乘 4。年中調薪後，門檻也會跟著變。</p></div>
-      <div class="card"><h3>這筆不是所得稅</h3><p>補充保費是健保費，報稅時不會退。年終獎金另外還可能被扣 5% 所得稅，那是另一筆。</p></div>
+      <div class="card"><h3>這筆不是所得稅</h3><p>補充保費是健保費，報稅時不會退。預扣的 5% 所得稅則是先繳，隔年報稅時多退少補。</p></div>
     </div>
   </section>
 
@@ -96,7 +97,7 @@
     <h2>常見問題</h2>
     <div>
       <details><summary>換工作後，前一家公司發的獎金要算進去嗎？</summary><p>不用。4 倍門檻是以同一個投保單位計算，換到新公司就重新累計。</p></details>
-      <details><summary>年終獎金會被扣所得稅嗎？</summary><p>非每月給付的獎金，單次給付達 90,501 元（2026 年）時，公司會先扣 5% 所得稅，報稅時再結算。這和補充保費是兩筆不同的扣款。</p></details>
+      <details><summary>年終獎金會被扣所得稅嗎？</summary><p>非每月給付的獎金，單次給付達 90,501 元（2026 年）時，公司會先扣 5% 所得稅，報稅時再結算，本工具已列入。這和補充保費是兩筆不同的扣款。少數公司改把獎金併入當月薪資、依扣繳稅額表計算，或是你不是稅法上的居住者（扣 18%），實際預扣金額會不同。</p></details>
       <details><summary>員工酬勞配股也算嗎？</summary><p>算。以股票發放的員工酬勞同樣列入獎金累計，計費金額依健保署規定的價值認定。</p></details>
     </div>
   </section>

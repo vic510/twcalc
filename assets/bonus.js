@@ -20,6 +20,8 @@ function render() {
   $("o-over").textContent = fmt(r.over);
   $("o-prem").textContent = UI.minus(r.premium);
   $("o-why").textContent = r.over ? "超過部分 " + fmt(r.over) + " 元 × 2.11%" : "全年累計未超過 4 倍，免扣";
+  $("o-tax").textContent = UI.minus(r.tax);
+  $("o-tax-why").textContent = r.taxRule + (r.tax ? "，隔年報稅多退少補" : "");
   $("o-net").textContent = "NT$ " + fmt(r.net);
   const tip = $("tip");
   if (!r.over && r.room > r.thisBonus) {
@@ -41,6 +43,6 @@ $("known").addEventListener("change", () => {
 $("form").addEventListener("submit", e => e.preventDefault());
 $("copy").addEventListener("click", () => {
   const r = window.__r;
-  UI.copy(`【獎金補充保費試算】\n健保投保金額：${fmt(r.insured)} 元（4 倍門檻 ${fmt(r.cap)} 元）\n今年已發：${fmt(r.paidBefore)} 元\n本次獎金：${fmt(r.thisBonus)} 元\n補充保費：${fmt(r.premium)} 元\n扣保費後：${fmt(r.net)} 元`, $("toast"));
+  UI.copy(`【獎金扣款試算】\n健保投保金額：${fmt(r.insured)} 元（4 倍門檻 ${fmt(r.cap)} 元）\n今年已發：${fmt(r.paidBefore)} 元\n本次獎金：${fmt(r.thisBonus)} 元\n補充保費：${fmt(r.premium)} 元\n預扣所得稅：${fmt(r.tax)} 元\n實際入帳：${fmt(r.net)} 元`, $("toast"));
 });
 render();

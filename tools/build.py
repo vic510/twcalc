@@ -34,14 +34,14 @@ CTAS = {
 
 PAGES = [
     # slug, src, 標題, 描述, 導覽名稱
-    ("", "home.html", "twcalc 台灣試算", "台灣人常用的薪資、接案、獎金與租金試算小工具：勞健保自付額、接案實拿、年終補充保費、房東租金扣繳。免費使用，資料只在瀏覽器裡運算。", "首頁"),
+    ("", "home.html", "twcalc 台灣試算", "台灣人常用的薪資、接案、獎金與租金試算小工具：勞健保自付額、接案實拿、年終獎金扣繳、房東租金扣繳。免費使用，資料只在瀏覽器裡運算。", "首頁"),
     ("freelance/", "freelance.html", "接案實拿試算", "台灣接案者報酬試算：輸入報價，算出代扣所得稅、二代健保補充保費與實拿金額；也能反推想實拿多少該報價多少。", "接案實拿"),
     ("payroll/", "payroll.html", "勞健保自付額試算", "輸入月薪，算出 2026 年勞保、健保、勞退自提要扣多少，實際入帳多少，以及公司幫你負擔多少。", "勞健保"),
-    ("bonus/", "bonus.html", "年終獎金補充保費試算", "年終、三節獎金會不會被扣二代健保補充保費？輸入投保金額與獎金，算出超過 4 倍門檻要扣多少。", "年終獎金"),
+    ("bonus/", "bonus.html", "年終獎金實領試算", "年終、三節獎金會被扣多少？輸入投保金額與獎金，算出二代健保補充保費（超過 4 倍門檻）與 5% 預扣所得稅，看實際入帳金額。", "年終獎金"),
     ("rent/", "rent.html", "房東租金扣繳試算", "房子租給公司要扣多少稅和補充保費？輸入月租金，算出每月實收、全年租賃所得與報稅前要知道的數字。", "租金"),
 ]
 
-THEME_INIT = "<script>try{document.documentElement.dataset.theme=localStorage.getItem('twcalc-theme')||'light'}catch(e){document.documentElement.dataset.theme='light'}</script>"
+THEME_INIT = "<script>(function(){var t;try{t=localStorage.getItem('twcalc-theme')}catch(e){}if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.dataset.theme=t})()</script>"
 FAVICON = "data:image/svg+xml," + "%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231B2B4B'/%3E%3Ctext x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='monospace'%3Etw%3C/text%3E%3C/svg%3E"
 
 

@@ -13,7 +13,7 @@
 <meta property="og:locale" content="zh_TW">
 <meta name="theme-color" content="#1B2B4B">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231B2B4B'/%3E%3Ctext x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='monospace'%3Etw%3C/text%3E%3C/svg%3E">
-<script>try{document.documentElement.dataset.theme=localStorage.getItem('twcalc-theme')||'light'}catch(e){document.documentElement.dataset.theme='light'}</script>
+<script>(function(){var t;try{t=localStorage.getItem('twcalc-theme')}catch(e){}if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.dataset.theme=t})()</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@700&family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -110,6 +110,7 @@
 
   <section class="info">
     <h2>試算依據（2026 年）</h2>
+    <p class="swipe" aria-hidden="true">← 表格可左右滑動 →</p>
     <div class="tbl">
       <table>
         <thead><tr><th>項目</th><th>費率</th><th>你負擔</th><th>公司負擔</th><th>投保金額範圍</th></tr></thead>

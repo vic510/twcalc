@@ -118,9 +118,11 @@
     };
   }
 
-  // ---------- 獎金補充保費 ----------
+  // ---------- 獎金補充保費、預扣所得稅 ----------
   // 全年累計獎金超過「當月投保金額 4 倍」的部分 × 2.11%，單次以 1,000 萬為上限
-  function bonus(insured, paidBefore, thisBonus) {
+  // 所得稅：非每月給付之薪資，單次給付達起扣標準（2026 年 90,501 元）扣 5%（居住者）
+  function bonus(insured, paidBefore, thisBonus, year) {
+    const start = RULES[year || 2026].partTimeTaxStart;
     insured = Math.max(0, Math.floor(Number(insured) || 0));
     paidBefore = Math.max(0, Math.floor(Number(paidBefore) || 0));
     thisBonus = Math.max(0, Math.floor(Number(thisBonus) || 0));
@@ -129,7 +131,10 @@
     const base = Math.min(over, PREMIUM_CAP);
     const premium = Math.round(base * PREMIUM_RATE);
     const room = Math.max(0, cap - paidBefore);
-    return { insured, cap, paidBefore, thisBonus, room, over: base, premium, net: thisBonus - premium };
+    const tax = thisBonus >= start ? Math.floor(thisBonus * 0.05) : 0;
+    const taxRule = tax ? "單次給付達 " + fmt(start) + " 元，預扣 5%" : "單次給付未達 " + fmt(start) + " 元，免扣繳";
+    return { insured, cap, paidBefore, thisBonus, room, over: base, premium, afterPremium: thisBonus - premium,
+      taxStart: start, tax, taxRule, net: thisBonus - premium - tax };
   }
 
   // ---------- 房東租金 ----------
