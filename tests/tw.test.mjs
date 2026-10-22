@@ -31,6 +31,11 @@ t("bonus default net", () => { const r = TW.bonus(40100, 40000, 150000); assert.
 
 t("rent corp 25,000", () => { const r = TW.rent(25000, { corporateTenant: true }); assert.equal(r.tax, 2500); assert.equal(r.premium, 528); assert.equal(r.net, 21972); assert.equal(r.taxableIncome, Math.round(300000 * 0.57)); });
 t("rent corp 20,000", () => { const r = TW.rent(20000, { corporateTenant: true }); assert.equal(r.tax, 0); assert.equal(r.premium, 422); });
+t("income tax brackets 115", () => { assert.equal(TW.incomeTax(610000), 30500); assert.equal(TW.incomeTax(1380000), 122900); assert.equal(TW.incomeTax(0), 0); });
+t("div premium threshold", () => { assert.equal(TW.divPremium(19999), 0); assert.equal(TW.divPremium(20000), 422); });
+t("dividend default", () => { const r = TW.dividend({ perPayment: 25000, times: 4, salary: 600000 }); assert.equal(r.annualPremium, 2112); assert.equal(r.combined, 3300); assert.equal(r.separate, 34800); assert.equal(r.best, "combined"); });
+t("dividend credit refund", () => assert.equal(TW.dividend({ perPayment: 15000, times: 4 }).combined, -5100));
+t("dividend credit cap, high earner separate", () => { const r = TW.dividend({ perPayment: 300000, times: 4, salary: 6000000 }); assert.equal(r.credit, 80000); assert.equal(r.best, "separate"); });
 t("rent individual", () => { const r = TW.rent(30000); assert.equal(r.tax + r.premium, 0); });
 
 console.log(n, "tests passed");

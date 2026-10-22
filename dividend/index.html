@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>股利稅與補充保費試算｜twcalc 台灣試算</title>
+<meta name="description" content="存股族、ETF 配息試算：單次股利達 2 萬元要扣多少補充保費，五月報稅選合併計稅（8.5% 抵減）還是分開計稅（28%）比較省。">
+<link rel="canonical" href="https://vic510.github.io/twcalc/dividend/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="股利稅與補充保費試算｜twcalc 台灣試算">
+<meta property="og:description" content="存股族、ETF 配息試算：單次股利達 2 萬元要扣多少補充保費，五月報稅選合併計稅（8.5% 抵減）還是分開計稅（28%）比較省。">
+<meta property="og:url" content="https://vic510.github.io/twcalc/dividend/">
+<meta property="og:locale" content="zh_TW">
+<meta name="theme-color" content="#1B2B4B">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231B2B4B'/%3E%3Ctext x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='monospace'%3Etw%3C/text%3E%3C/svg%3E">
+<script>(function(){var t;try{t=localStorage.getItem('twcalc-theme')}catch(e){}if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.dataset.theme=t})()</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@700&family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../assets/site.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "股利稅與補充保費試算", "url": "https://vic510.github.io/twcalc/dividend/", "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "inLanguage": "zh-Hant-TW", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TWD"}, "description": "存股族、ETF 配息試算：單次股利達 2 萬元要扣多少補充保費，五月報稅選合併計稅（8.5% 抵減）還是分開計稅（28%）比較省。"}</script>
+</head>
+<body>
+<div class="wrap">
+<nav class="nav" aria-label="主要">
+  <a class="brand" href="../"><b>twcalc</b><span>台灣試算</span></a>
+  <div class="nav-r"><div class="links"><a href="../" class="keep">首頁</a><a href="../freelance/">接案實拿</a><a href="../payroll/">勞健保</a><a href="../bonus/">年終獎金</a><a href="../dividend/" aria-current="page">股利</a><a href="../rent/">租金</a></div><button class="theme" id="theme" type="button"></button></div>
+</nav>
+  <header class="hero">
+    <div class="eyebrow">存股族・ETF 配息・2026 年規定</div>
+    <h1><span class="nw">領股利，</span><span class="nw">要扣多少、怎麼報稅最省？</span></h1>
+    <p class="lede">單次配息的股利所得達 <b>20,000 元</b>要先扣 <b>2.11%</b> 補充保費；五月報稅還要選<b>合併計稅（8.5% 抵減）</b>或<b>分開計稅（28%）</b>。輸入配息和薪資，兩種算法一次比較。</p>
+  </header>
+
+  <div class="main">
+    <form class="panel" id="form" autocomplete="off">
+      <div class="field">
+        <label class="label" for="per">每次配息的股利所得</label>
+        <div class="money"><span>NT$</span><input id="per" inputmode="numeric" value="25,000" aria-describedby="per-h"></div>
+        <div class="hint" id="per-h">一般股票填整筆現金股利。ETF 只填配息中「股利所得（54C）」的部分，可在投信公告的收益分配組成或扣繳憑單上看到。</div>
+      </div>
+
+      <div class="field">
+        <div class="label" id="times-l">一年配幾次</div>
+        <div class="seg" role="group" aria-labelledby="times-l">
+          <button type="button" data-times="1" aria-pressed="false">年配</button>
+          <button type="button" data-times="2" aria-pressed="false">半年配</button>
+          <button type="button" data-times="4" aria-pressed="true">季配</button>
+          <button type="button" data-times="12" aria-pressed="false">月配</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label" for="other">其他股票、ETF 的全年股利</label>
+        <div class="money sm"><span>NT$</span><input id="other" inputmode="numeric" value="0"></div>
+        <div class="hint">全戶其他持股一年的股利所得合計，報稅比較時一起算。補充保費要各檔各次分開看，這裡不計。</div>
+      </div>
+
+      <div class="field">
+        <div class="label" id="fs-l">申報身分</div>
+        <div class="seg" role="group" aria-labelledby="fs-l">
+          <button type="button" data-fs="single" aria-pressed="true">單身</button>
+          <button type="button" data-fs="married" aria-pressed="false">有配偶合併申報</button>
+        </div>
+      </div>
+      <div class="two">
+        <div class="field">
+          <label class="label" for="salary">本人全年薪資</label>
+          <div class="money sm"><span>NT$</span><input id="salary" inputmode="numeric" value="600,000"></div>
+        </div>
+        <div class="field" id="sp-f" hidden>
+          <label class="label" for="spouse">配偶全年薪資</label>
+          <div class="money sm"><span>NT$</span><input id="spouse" inputmode="numeric" value="0"></div>
+        </div>
+      </div>
+      <div class="field">
+        <label class="label" for="deps">扶養親屬人數</label>
+        <select class="sel" id="deps">
+          <option value="0" selected>0 人</option><option value="1">1 人</option><option value="2">2 人</option><option value="3">3 人</option><option value="4">4 人</option><option value="5">5 人</option>
+        </select>
+      </div>
+    </form>
+
+    <div class="side">
+      <div class="slip" aria-live="polite">
+        <div class="slip-head"><h2>股利扣款與報稅</h2><span class="code" id="slip-code"></span></div>
+        <div class="rows">
+          <div class="row"><span class="k">全年股利所得</span><span class="v" id="o-div"></span><span class="why" id="o-div-why"></span></div>
+          <div class="row minus"><span class="k">補充保費（每次）</span><span class="v" id="o-prem"></span><span class="why" id="o-prem-why"></span></div>
+          <div class="row minus"><span class="k">補充保費（全年）</span><span class="v" id="o-prem-y"></span></div>
+          <div class="row"><span class="k">合併計稅：應納稅額</span><span class="v" id="o-comb"></span><span class="why" id="o-comb-why"></span></div>
+          <div class="row"><span class="k">分開計稅：應納稅額</span><span class="v" id="o-sep"></span><span class="why" id="o-sep-why"></span></div>
+        </div>
+        <div class="net"><span class="netl"><span class="stamp" id="stamp" aria-hidden="true">較省</span><span class="k" id="o-best"></span></span><span class="v" id="o-save"></span></div>
+      </div>
+      <div class="alert" id="tip" hidden></div>
+      <div class="actions">
+        <button class="btn" type="button" id="copy">複製試算明細</button>
+        <span class="toast" id="toast" role="status"></span>
+      </div>
+      <div class="next" id="next">
+        <span class="tag">下一步</span>
+        <h3>每一筆配息都記下來</h3>
+        <p id="next-body">多檔股票、ETF 的配息一筆一行：自動判斷 2 萬門檻、核對補充保費有沒有扣錯，每月現金流和五月報稅的合併／分開比較一頁整理好。</p>
+        <div class="row2"><span class="p">NT$ 290</span><span class="btn" aria-disabled="true">即將上架</span></div>
+        <span class="free">算一筆免費；要開單、核對、記一整年，用範本。</span>
+      </div>
+    </div>
+  </div>
+
+  <section class="info">
+    <h2>存股族容易忽略的三件事</h2>
+    <div class="grid3">
+      <div class="card"><h3>補充保費看「單次」，不是全年</h3><p>同一檔股票單次發放的股利所得達 2 萬元，整筆扣 2.11%，19,999 元則完全不扣。季配、月配的 ETF 單次金額較小，比較不容易碰到門檻。</p></div>
+      <div class="card"><h3>ETF 配息不一定全部算股利</h3><p>ETF 配息可能包含股利所得（54C）、財產交易所得（76）和收益平準金。補充保費和 8.5% 抵減都只看股利所得的部分。</p></div>
+      <div class="card"><h3>8.5% 抵減可以退稅</h3><p>合併計稅時，股利 × 8.5% 可以抵減稅額，每戶上限 8 萬元，抵完還有剩會退還。所得不高的人選合併計稅，常常反而退稅。</p></div>
+    </div>
+  </section>
+
+  <section class="info">
+    <h2>試算依據（115 年度，2027 年 5 月申報）</h2>
+    <p class="swipe" aria-hidden="true">← 表格可左右滑動 →</p>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>項目</th><th>規定</th></tr></thead>
+        <tbody>
+          <tr><td>補充保費</td><td>單次給付的股利所得達 20,000 元，按全額 × 2.11% 扣取，單次上限 1,000 萬元</td></tr>
+          <tr><td>合併計稅</td><td>股利併入綜合所得，依累進稅率計算，再減股利 × 8.5% 可抵減稅額（每戶上限 80,000 元，可退）</td></tr>
+          <tr><td>分開計稅</td><td>股利按 28% 單獨計算，其餘所得照常計稅</td></tr>
+          <tr><td>免稅額、扣除額</td><td class="n">免稅額 101,000／人；標準扣除額 136,000（有配偶 272,000）；薪資特別扣除額 227,000</td></tr>
+          <tr><td>課稅級距</td><td class="n">5% ≤ 610,000；12% ≤ 1,380,000；20% ≤ 2,770,000；30% ≤ 5,190,000；40% 以上</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="hint">本工具只用標準扣除額，未計列舉扣除、儲蓄投資特別扣除、基本生活費差額與基本稅額（最低稅負），結果僅供比較方向。實際稅額以財政部報稅系統試算為準。</p>
+  </section>
+
+  <section class="info">
+    <h2>常見問題</h2>
+    <div>
+      <details><summary>同一檔股票放在兩個證券帳戶，可以分開算 2 萬嗎？</summary><p>不行。補充保費以同一人、同一家公司單次發放的股利合計判斷，分散在不同券商帳戶仍會合併計算。</p></details>
+      <details><summary>補充保費報稅時會退嗎？</summary><p>不會退，但選列舉扣除時可以和健保費一起列報。</p></details>
+      <details><summary>聽說補充保費要改成全年合併計算？</summary><p>衛福部曾提出把股利、利息、租金等改為年度結算的方案，但行政院已喊暫緩，目前仍是單次 2 萬元門檻。規定若有變動，本頁會更新。</p></details>
+      <details><summary>股利多少以下選合併計稅比較好？</summary><p>常見說法是全年股利約 94 萬元以下合併計稅較划算，但真正的關鍵是你的邊際稅率。邊際稅率 30% 以下通常合併較省，40% 級距才可能分開計稅較省，用上面的試算比較最準。</p></details>
+    </div>
+  </section>
+
+<footer class="foot">
+  <span>所有試算都在你的瀏覽器裡完成，不會上傳任何數字。結果依 2026 年 10 月的公開規定計算，僅供參考，實際金額以扣繳單位與主管機關認定為準。</span>
+  <span>依據：財政部各類所得扣繳率標準、薪資所得扣繳辦法；衛福部中央健康保險署投保金額分級表與補充保險費規定；勞動部勞保、勞退分級表與最低工資公告。</span>
+</footer>
+</div>
+<script src="../assets/tw.js"></script>
+<script src="../assets/ui.js"></script>
+<script src="../assets/dividend.js" defer></script>
+</body>
+</html>

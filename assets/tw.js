@@ -163,7 +163,53 @@
     };
   }
 
-  const api = { fmt, RULES, TYPES, calc, reverse, trap, LABOR_PT, LABOR_FT, HEALTH, PENSION, INS, grade, payroll, bonus, rent, RENT_EXPENSE };
+  // ---------- 股利：補充保費、合併／分開計稅 ----------
+  // 補充保費：單次給付的股利所得（ETF 看 54C 部分）達 20,000 元，全額 × 2.11%
+  // 綜所稅：2026 年領的股利於 2027 年 5 月申報（115 年度）。只用標準扣除額，不含列舉、基本生活費差額與基本稅額
+  const TAX = {
+    2026: { exemption: 101000, stdSingle: 136000, stdMarried: 272000, salaryDed: 227000,
+      brackets: [[610000, 0.05], [1380000, 0.12], [2770000, 0.20], [5190000, 0.30], [Infinity, 0.40]] }
+  };
+  const DIV = { premiumStart: 20000, credit: 0.085, creditCap: 80000, separate: 0.28 };
+
+  function incomeTax(net, year) {
+    let tax = 0, lower = 0;
+    for (const [upper, rate] of TAX[year || 2026].brackets) {
+      if (net > lower) tax += (Math.min(net, upper) - lower) * rate;
+      lower = upper;
+    }
+    return Math.round(tax);
+  }
+
+  function divPremium(amount) {
+    amount = Math.max(0, Math.floor(Number(amount) || 0));
+    return amount >= DIV.premiumStart ? prem(amount) : 0;
+  }
+
+  function dividend(opts) {
+    opts = opts || {};
+    const t = TAX[opts.year || 2026];
+    const n = x => Math.max(0, Math.floor(Number(x) || 0));
+    const perPay = n(opts.perPayment), times = Math.max(1, n(opts.times) || 1), other = n(opts.otherDividend);
+    const married = !!opts.married, deps = n(opts.dependents);
+    const salary = n(opts.salary), spouseSalary = married ? n(opts.spouseSalary) : 0;
+    const premiumEach = divPremium(perPay);
+    const annualDiv = perPay * times + other;
+    const salaryNet = salary - Math.min(salary, t.salaryDed) + spouseSalary - Math.min(spouseSalary, t.salaryDed);
+    const deductions = t.exemption * ((married ? 2 : 1) + deps) + (married ? t.stdMarried : t.stdSingle);
+    const baseNet = Math.max(0, salaryNet - deductions);
+    const credit = Math.min(Math.round(annualDiv * DIV.credit), DIV.creditCap);
+    const combined = incomeTax(Math.max(0, salaryNet + annualDiv - deductions), opts.year) - credit;
+    const separate = incomeTax(baseNet, opts.year) + Math.round(annualDiv * DIV.separate);
+    return {
+      perPay, times, other, annualDiv, premiumEach, annualPremium: premiumEach * times,
+      baseNet, credit, combined, separate, baseTax: incomeTax(baseNet, opts.year),
+      best: combined <= separate ? "combined" : "separate", saving: Math.abs(separate - combined)
+    };
+  }
+
+  const api = { fmt, RULES, TYPES, calc, reverse, trap, LABOR_PT, LABOR_FT, HEALTH, PENSION, INS, grade, payroll, bonus, rent, RENT_EXPENSE,
+    TAX, DIV, incomeTax, divPremium, dividend };
   if (typeof module !== "undefined" && module.exports) module.exports = api;
   else root.TW = api;
 })(typeof window !== "undefined" ? window : globalThis);

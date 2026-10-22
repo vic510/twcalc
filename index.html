@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>twcalc 台灣試算</title>
-<meta name="description" content="台灣人常用的薪資、接案、獎金與租金試算小工具：勞健保自付額、接案實拿、年終獎金扣繳、房東租金扣繳。免費使用，資料只在瀏覽器裡運算。">
+<meta name="description" content="台灣人常用的薪資、接案、獎金與租金試算小工具：勞健保自付額、接案實拿、年終獎金扣繳、股利報稅、房東租金扣繳。免費使用，資料只在瀏覽器裡運算。">
 <link rel="canonical" href="https://vic510.github.io/twcalc/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="twcalc 台灣試算">
-<meta property="og:description" content="台灣人常用的薪資、接案、獎金與租金試算小工具：勞健保自付額、接案實拿、年終獎金扣繳、房東租金扣繳。免費使用，資料只在瀏覽器裡運算。">
+<meta property="og:description" content="台灣人常用的薪資、接案、獎金與租金試算小工具：勞健保自付額、接案實拿、年終獎金扣繳、股利報稅、房東租金扣繳。免費使用，資料只在瀏覽器裡運算。">
 <meta property="og:url" content="https://vic510.github.io/twcalc/">
 <meta property="og:locale" content="zh_TW">
 <meta name="theme-color" content="#1B2B4B">
@@ -18,17 +18,17 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@700&family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="assets/site.css">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "twcalc 台灣試算", "url": "https://vic510.github.io/twcalc/", "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "inLanguage": "zh-Hant-TW", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TWD"}, "description": "台灣人常用的薪資、接案、獎金與租金試算小工具：勞健保自付額、接案實拿、年終獎金扣繳、房東租金扣繳。免費使用，資料只在瀏覽器裡運算。"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "twcalc 台灣試算", "url": "https://vic510.github.io/twcalc/", "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "inLanguage": "zh-Hant-TW", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TWD"}, "description": "台灣人常用的薪資、接案、獎金與租金試算小工具：勞健保自付額、接案實拿、年終獎金扣繳、股利報稅、房東租金扣繳。免費使用，資料只在瀏覽器裡運算。"}</script>
 </head>
 <body>
 <div class="wrap">
 <nav class="nav" aria-label="主要">
   <a class="brand" href=""><b>twcalc</b><span>台灣試算</span></a>
-  <div class="nav-r"><div class="links"><a href="" aria-current="page" class="keep">首頁</a><a href="freelance/">接案實拿</a><a href="payroll/">勞健保</a><a href="bonus/">年終獎金</a><a href="rent/">租金</a></div><button class="theme" id="theme" type="button"></button></div>
+  <div class="nav-r"><div class="links"><a href="" aria-current="page" class="keep">首頁</a><a href="freelance/">接案實拿</a><a href="payroll/">勞健保</a><a href="bonus/">年終獎金</a><a href="dividend/">股利</a><a href="rent/">租金</a></div><button class="theme" id="theme" type="button"></button></div>
 </nav>
   <header class="hero">
     <div class="eyebrow">免費・不用註冊・資料不上傳</div>
-    <h1><span class="nw">薪水、接案、獎金、租金，</span><span class="nw">到手到底多少？</span></h1>
+    <h1><span class="nw">薪水、接案、獎金、股利、租金，</span><span class="nw">到手到底多少？</span></h1>
     <p class="lede">台灣的扣繳和健保規則很瑣碎。這裡把常用的幾種試算做成小工具，輸入一個數字，就能看到每一筆扣款從哪裡來。</p>
   </header>
 
@@ -54,6 +54,13 @@
       <span class="q">投保 40,100 × 4 = 160,400 門檻</span>
       <span class="go">開始試算 →</span>
     </a>
+    <a class="tool" href="dividend/">
+      <span class="tag">存股族</span>
+      <h3>股利稅與補充保費試算</h3>
+      <p>單次股利達 2 萬元要扣 2.11%；報稅選合併計稅還是分開計稅比較省，一次比較。</p>
+      <span class="q">季配 25,000 → 合併計稅省 31,500</span>
+      <span class="go">開始試算 →</span>
+    </a>
     <a class="tool" href="rent/">
       <span class="tag">房東</span>
       <h3>房東租金扣繳試算</h3>
@@ -75,6 +82,11 @@
         <h3>薪資單核對與報稅整理表</h3>
         <p>每月薪資單照抄進去，自動比對勞保、健保、勞退自提有沒有扣錯，獎金補充保費也一併檢查。</p>
         <div class="row2"><span class="p">NT$ 190</span><span class="btn" aria-disabled="true">即將上架</span></div>
+      </div>
+      <div class="packcard">
+        <h3>存股股利記帳表</h3>
+        <p>股票、ETF 配息一筆一行：2 萬門檻與補充保費核對、每月股利現金流、報稅合併／分開計稅自動比較。</p>
+        <div class="row2"><span class="p">NT$ 290</span><span class="btn" aria-disabled="true">即將上架</span></div>
       </div>
       <div class="packcard">
         <h3>房東租金收支記帳表</h3>
