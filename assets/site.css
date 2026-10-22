@@ -146,3 +146,14 @@ footer.foot{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);fo
 .packcard p{margin:0;font-size:14px;color:var(--muted)}
 .packcard .row2{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:6px}
 .packcard .p{font-family:var(--f-mono);font-size:20px}
+
+/* 算完之後的下一步 */
+.next{border:1px solid var(--line);border-radius:14px;padding:18px 20px;background:var(--accent-soft);display:grid;gap:8px}
+.next .tag{font-size:12px;font-weight:700;letter-spacing:.06em;color:var(--accent-text)}
+.next h3{margin:0;font-size:17px}
+.next p{margin:0;font-size:14px;color:var(--ink)}
+.next p b{font-family:var(--f-mono);font-weight:500}
+.next .row2{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:4px}
+.next .p{font-family:var(--f-mono);font-size:18px}
+.next .free{font-size:12px;color:var(--muted)}
+.btn[aria-disabled="true"]{background:transparent;color:var(--muted);border-color:var(--line);cursor:default;filter:none}

@@ -5,6 +5,32 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 BASE = "https://vic510.github.io/twcalc/"
 PACK_FREELANCE = "https://peterleaf8.gumroad.com/l/tw-freelance-pack"
 PACK_SHOP = "https://peterleaf8.gumroad.com/l/tw-shop-listing-pack"
+PACK_LANDLORD = ""   # 上架後填入 Gumroad 連結
+PACK_PAYROLL = ""    # 上架後填入 Gumroad 連結
+
+
+def buy(url, label):
+    if url:
+        return f'<a class="btn" href="{url}" target="_blank" rel="noopener">{label}</a>'
+    return '<span class="btn" aria-disabled="true">即將上架</span>'
+
+
+def cta(tag, title, body, price, url, label):
+    return f"""<div class="next" id="next">
+        <span class="tag">{tag}</span>
+        <h3>{title}</h3>
+        <p id="next-body">{body}</p>
+        <div class="row2"><span class="p">{price}</span>{buy(url, label)}</div>
+        <span class="free">算一筆免費；要開單、核對、記一整年，用範本。</span>
+      </div>"""
+
+
+CTAS = {
+    "freelance.html": cta("下一步", "把這筆直接做成請款單", "範本包的請款單會用同一套規則自動算好代扣稅和補充保費，填好就能寄給客戶，還會記進年度收支表。", "NT$ 290", PACK_FREELANCE, "取得範本包"),
+    "payroll.html": cta("下一步", "你的薪資單有沒有扣錯？", "每月照抄薪資單，表格依分級表算出應扣金額並和實扣比對，扣錯會標紅；年底報稅要的數字一頁整理好。", "NT$ 190", PACK_PAYROLL, "取得核對表"),
+    "bonus.html": cta("下一步", "整年的獎金一起追蹤", "三節、績效、年終每發一次記一行，自動追蹤 4 倍門檻，檢查公司有沒有扣錯補充保費。", "NT$ 190", PACK_PAYROLL, "取得核對表"),
+    "rent.html": cta("下一步", "多間房子、一整年的租金一起管", "記下每次收租，未收的租金標紅、押金自動設算、43% 和列舉費用自動比較，報稅數字一頁整理好。", "NT$ 390", PACK_LANDLORD, "取得記帳表"),
+}
 
 PAGES = [
     # slug, src, 標題, 描述, 導覽名稱
@@ -22,7 +48,7 @@ FAVICON = "data:image/svg+xml," + "%3Csvg xmlns='http://www.w3.org/2000/svg' vie
 def page(slug, src, title, desc, nav_name):
     up = "../" * slug.count("/")
     body = (ROOT / "src" / src).read_text()
-    body = body.replace("{{UP}}", up).replace("{{PACK_FREELANCE}}", PACK_FREELANCE).replace("{{PACK_SHOP}}", PACK_SHOP)
+    body = body.replace("{{CTA}}", CTAS.get(src, "")).replace("{{UP}}", up).replace("{{PACK_FREELANCE}}", PACK_FREELANCE).replace("{{PACK_SHOP}}", PACK_SHOP).replace("{{BUY_LANDLORD}}", buy(PACK_LANDLORD, "查看記帳表")).replace("{{BUY_PAYROLL}}", buy(PACK_PAYROLL, "查看核對表"))
     links = "".join(
         f'<a href="{up}{s}"{" aria-current=\"page\"" if s == slug else ""}{" class=\"keep\"" if s == "" else ""}>{n}</a>'
         for s, _, _, _, n in PAGES)

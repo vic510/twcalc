@@ -37,6 +37,10 @@ function render() {
   } else $("trap").hidden = true;
 
   if (lastNet !== res.net) { UI.hit($("stamp")); lastNet = res.net; }
+  const nb = $("next-body");
+  if (nb && res.gross) nb.innerHTML = state.mode === "fwd"
+    ? `你剛算的 <b>NT$ ${fmt(res.gross)}</b>，範本包的請款單會自動列出代扣稅 <b>${fmt(res.tax)}</b>、補充保費 <b>${fmt(res.premium)}</b>，對方應實付 <b>${fmt(res.net)}</b>。填好就能寄給客戶，也會記進年度收支表。`
+    : `想實拿 <b>NT$ ${fmt(res.net)}</b>？範本包的報價單輸入這個數字，會自動反推最低報價 <b>${fmt(res.gross)}</b>，直接開出報價單給客戶。`;
   window.__res = res;
 }
 

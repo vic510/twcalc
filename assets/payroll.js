@@ -24,6 +24,8 @@ function render() {
   $("b-pension").textContent = fmt(r.pensionBoss);
   $("b-note").textContent = "公司每月為你多付約 " + fmt(r.bossTotal) + " 元，你的實際人事成本約 " + fmt(r.salary + r.bossTotal) + " 元。";
   if (last !== r.takeHome) { UI.hit($("stamp")); last = r.takeHome; }
+  const nb = $("next-body");
+  if (nb) nb.innerHTML = `依你的月薪，勞保應扣 <b>${fmt(r.laborEmp)}</b>、健保應扣 <b>${fmt(r.healthEmp)}</b>。拿薪資單對對看；核對表會每個月自動比對，扣錯會標紅，年底報稅要的數字一頁整理好。`;
   window.__r = r;
 }
 
