@@ -1,0 +1,73 @@
+  <header class="hero">
+    <div class="eyebrow">房東・2026 年規定</div>
+    <h1><span class="nw">房子租給公司，</span><span class="nw">每月實收多少？</span></h1>
+    <p class="lede">承租人是公司、行號或機關時，租金超過兩萬元要先扣 <b>10% 所得稅</b>，達兩萬元還要扣 <b>2.11% 補充保費</b>。輸入月租金，算出每月實收和全年要報的租賃所得。</p>
+  </header>
+
+  <div class="main">
+    <form class="panel" id="form" autocomplete="off">
+      <div class="field">
+        <label class="label" for="rent">每月租金</label>
+        <div class="money"><span>NT$</span><input id="rent" inputmode="numeric" value="25,000"></div>
+        <div class="hint">每次收取的租金。若一次收一季或半年，請填一次收取的總額，並把下方月數改成實際收款次數。</div>
+      </div>
+
+      <div class="field">
+        <div class="label">承租人是誰</div>
+        <div class="types">
+          <label class="type"><input type="radio" name="tenant" id="t-corp" value="corp" checked><strong>公司、行號、機關、學校</strong><span>有扣繳義務，付款時會先扣稅和補充保費</span></label>
+          <label class="type"><input type="radio" name="tenant" id="t-person" value="person"><strong>個人</strong><span>沒有扣繳義務，租金全額入帳，報稅時自己申報</span></label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label" for="months">今年收款次數</label>
+        <select class="sel" id="months">
+          <option value="12" selected>12 次（整年）</option><option value="11">11 次</option><option value="10">10 次</option><option value="9">9 次</option>
+          <option value="8">8 次</option><option value="7">7 次</option><option value="6">6 次</option><option value="5">5 次</option>
+          <option value="4">4 次</option><option value="3">3 次</option><option value="2">2 次</option><option value="1">1 次</option>
+        </select>
+      </div>
+      <label class="check"><input type="checkbox" id="exempt"> <span>我符合免扣補充保費資格<br><span class="hint">例如低收入戶、中低收入戶，或以第 2、3 類被保險人等身分符合規定者。不確定就不要勾。</span></span></label>
+    </form>
+
+    <div class="side">
+      <div class="slip" aria-live="polite">
+        <div class="slip-head"><h2>租金收款明細</h2><span class="code" id="slip-code"></span></div>
+        <div class="rows">
+          <div class="row"><span class="k">每次租金</span><span class="v" id="o-rent"></span></div>
+          <div class="row minus"><span class="k">代扣所得稅</span><span class="v" id="o-tax"></span><span class="why" id="o-tax-why"></span></div>
+          <div class="row minus"><span class="k">代扣補充保費</span><span class="v" id="o-prem"></span><span class="why" id="o-prem-why"></span></div>
+        </div>
+        <div class="net"><span class="netl"><span class="stamp" id="stamp" aria-hidden="true">實收</span><span class="k">每次實收</span></span><span class="v" id="o-net"></span></div>
+      </div>
+      <div class="cost" aria-label="全年">
+        <div><small>全年租金收入</small><b id="y-rent"></b></div>
+        <div><small>全年租賃所得（扣 43% 費用）</small><b id="y-income"></b></div>
+        <div><small>全年已扣稅（報稅可抵）</small><b id="y-tax"></b></div>
+      </div>
+      <div class="alert" id="trap" hidden></div>
+      <div class="actions">
+        <button class="btn" type="button" id="copy">複製試算明細</button>
+        <span class="toast" id="toast" role="status"></span>
+      </div>
+    </div>
+  </div>
+
+  <section class="info">
+    <h2>房東報稅前要知道的事</h2>
+    <div class="grid3">
+      <div class="card"><h3>報稅的是「租賃所得」，不是租金</h3><p>沒有逐筆列舉費用時，可以直接減除 43% 必要損耗及費用，剩下 57% 併入綜合所得。</p></div>
+      <div class="card"><h3>扣掉的 10% 會在報稅時抵減</h3><p>公司代扣的所得稅是預繳，五月報稅時從應納稅額中扣除，繳多了會退。補充保費則不會退。</p></div>
+      <div class="card"><h3>押金也可能要設算所得</h3><p>收取押金時，國稅局會依當年度郵政定存利率設算租金收入。押金金額大的房東，報稅時記得一起計入。</p></div>
+    </div>
+  </section>
+
+  <section class="info">
+    <h2>常見問題</h2>
+    <div>
+      <details><summary>租給個人，為什麼不用扣？</summary><p>個人不是扣繳義務人，付租金時不會先扣稅或補充保費。但這筆租金仍是你的所得，五月報稅時要自己申報。</p></details>
+      <details><summary>租金剛好兩萬元會怎樣？</summary><p>所得稅不扣（應扣稅額 2,000 元未超過門檻），但補充保費要扣 422 元。租金 20,001 元起兩筆都扣。</p></details>
+      <details><summary>房屋稅、地價稅可以扣嗎？</summary><p>選擇逐筆列舉必要費用時，可以列報房屋稅、地價稅、修繕費等；選擇直接減除 43% 時就不能再另外列。</p></details>
+    </div>
+  </section>

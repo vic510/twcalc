@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>接案實拿試算｜twcalc 台灣試算</title>
+<meta name="description" content="台灣接案者報酬試算：輸入報價，算出代扣所得稅、二代健保補充保費與實拿金額；也能反推想實拿多少該報價多少。">
+<link rel="canonical" href="https://vic510.github.io/twcalc/freelance/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="接案實拿試算｜twcalc 台灣試算">
+<meta property="og:description" content="台灣接案者報酬試算：輸入報價，算出代扣所得稅、二代健保補充保費與實拿金額；也能反推想實拿多少該報價多少。">
+<meta property="og:url" content="https://vic510.github.io/twcalc/freelance/">
+<meta property="og:locale" content="zh_TW">
+<meta name="theme-color" content="#1B2B4B">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231B2B4B'/%3E%3Ctext x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='monospace'%3Etw%3C/text%3E%3C/svg%3E">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('twcalc-theme')||'light'}catch(e){document.documentElement.dataset.theme='light'}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@700&family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../assets/site.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "接案實拿試算", "url": "https://vic510.github.io/twcalc/freelance/", "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "inLanguage": "zh-Hant-TW", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TWD"}, "description": "台灣接案者報酬試算：輸入報價，算出代扣所得稅、二代健保補充保費與實拿金額；也能反推想實拿多少該報價多少。"}</script>
+</head>
+<body>
+<div class="wrap">
+<nav class="nav" aria-label="主要">
+  <a class="brand" href="../"><b>twcalc</b><span>台灣試算</span></a>
+  <div class="nav-r"><div class="links"><a href="../" class="keep">首頁</a><a href="../freelance/" aria-current="page">接案實拿</a><a href="../payroll/">勞健保</a><a href="../bonus/">年終獎金</a><a href="../rent/">租金</a></div><button class="theme" id="theme" type="button"></button></div>
+</nav>
+  <header class="hero">
+    <div class="eyebrow">台灣接案者・2026 / 2027 費率</div>
+    <h1><span class="nw">報價三萬，</span><span class="nw">實際入帳多少？</span></h1>
+    <p class="lede">輸入報酬金額，算出發案方會先扣的<b>所得稅</b>和<b>二代健保補充保費</b>。也可以反過來，輸入想實拿的金額，算出該報多少。資料只在你的瀏覽器裡運算，不會上傳。</p>
+  </header>
+
+  <div class="main">
+    <form class="panel" id="form" autocomplete="off">
+      <div class="field">
+        <div class="label" id="mode-l">我要算</div>
+        <div class="seg" role="group" aria-labelledby="mode-l">
+          <button type="button" id="mode-fwd" data-mode="fwd" aria-pressed="true">報價 → 實拿</button>
+          <button type="button" id="mode-rev" data-mode="rev" aria-pressed="false">想實拿 → 該報價</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label" for="amount" id="amount-l">報酬總額（含扣繳前）</label>
+        <div class="money"><span>NT$</span><input id="amount" inputmode="numeric" value="30,000" aria-describedby="amount-h"></div>
+        <div class="hint" id="amount-h">發案方開給你的單次給付金額。分期付款請一期一期算。</div>
+      </div>
+
+      <div class="field">
+        <div class="label">所得類別（看勞務報酬單上的代號）</div>
+        <div class="types" id="types"></div>
+      </div>
+
+      <div class="field">
+        <div class="label" id="year-l">給付年度</div>
+        <div class="seg" role="group" aria-labelledby="year-l">
+          <button type="button" id="year-2026" data-year="2026" aria-pressed="true">2026</button>
+          <button type="button" id="year-2027" data-year="2027" aria-pressed="false">2027</button>
+        </div>
+        <div class="hint" id="year-note" hidden></div>
+      </div>
+
+      <label class="check"><input type="checkbox" id="exempt"> <span>我符合免扣補充保費資格<br><span class="hint">例如低收入戶、中低收入戶等，需事先填聲明書給發案方。不確定就不要勾。</span></span></label>
+    </form>
+
+    <div class="side">
+      <div class="slip" aria-live="polite">
+        <div class="slip-head"><h2>勞務報酬試算</h2><span class="code" id="slip-code">所得類別 9A</span></div>
+        <div class="rows">
+          <div class="row"><span class="k" id="gross-k">報酬總額</span><span class="v" id="o-gross"></span></div>
+          <div class="row minus"><span class="k">代扣所得稅</span><span class="v" id="o-tax"></span><span class="why" id="o-tax-why"></span></div>
+          <div class="row minus"><span class="k">代扣二代健保補充保費</span><span class="v" id="o-prem"></span><span class="why" id="o-prem-why"></span></div>
+        </div>
+        <div class="net"><span class="netl"><span class="stamp" id="stamp" aria-hidden="true">實拿</span><span class="k" id="net-k">實際入帳</span></span><span class="v" id="o-net"></span></div>
+      </div>
+
+      <div class="alert" id="trap" hidden></div>
+
+      <div class="cost" aria-label="成本拆解">
+        <div><small>可在報稅時結算的預繳稅</small><b id="c-tax"></b></div>
+        <div><small>不會退回的補充保費</small><b id="c-prem"></b></div>
+        <div><small>實拿占報酬比例</small><b id="c-pct"></b></div>
+      </div>
+
+      <div class="actions">
+        <button class="btn" type="button" id="copy">複製試算明細</button>
+        <span class="toast" id="toast" role="status"></span>
+      </div>
+    </div>
+  </div>
+
+  <section class="info">
+    <h2>三個常見的誤會</h2>
+    <div class="grid3">
+      <div class="card"><h3>扣掉的 10% 不一定是損失</h3><p>9A、9B 預扣的所得稅只是先繳。五月報稅時會依你全年的所得和扣除額結算，扣多了會退回。真正不會退的是補充保費。</p></div>
+      <div class="card"><h3>報 20,001 元比報 19,999 元拿更少</h3><p>9A、9B 報酬一過兩萬元，預扣稅和補充保費同時開始扣，當下入帳會少兩千多元。報價接近兩萬時，先用上面的工具看清楚。</p></div>
+      <div class="card"><h3>9B 每年有 18 萬元免稅額</h3><p>稿費、版稅、演講鐘點費全年合計 18 萬元以內免稅，超過的部分還能再減 30% 費用。被預扣的稅，報稅時多半能退回不少。</p></div>
+    </div>
+  </section>
+
+  <section class="info">
+    <h2>試算依據</h2>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>所得類別</th><th>所得稅預扣（境內居住者）</th><th>二代健保補充保費</th></tr></thead>
+        <tbody>
+          <tr><td>9A 執行業務所得</td><td>應扣稅額超過 2,000 元（即報酬超過 20,000 元），扣 10%</td><td>單次給付達 20,000 元，扣 2.11%</td></tr>
+          <tr><td>9B 稿費、演講費等</td><td>同 9A</td><td>同 9A</td></tr>
+          <tr><td>50 兼職薪資所得</td><td>單次給付達 <span id="t-start">90,501</span> 元，扣 5%</td><td>單次給付達基本工資 <span id="t-wage">29,500</span> 元，扣 2.11%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="hint">補充保費單次計費上限 1,000 萬元。基本工資 2026 年為 29,500 元，2027 年調為 30,900 元。境外人士（一年在台未滿 183 天）適用不同稅率，本工具不涵蓋。</p>
+  </section>
+
+  <div class="pack">
+    <div>
+      <h2>接案者全套 Excel 範本包</h2>
+      <p class="hint" style="margin:0 0 12px">上面這套規則，已經寫進每一張表的公式裡。</p>
+      <ul>
+        <li>報價單：輸入想實拿的金額，自動反推報價</li>
+        <li>請款單：自動算出代扣稅、補充保費與實際入帳</li>
+        <li>勞務報酬單：發案方要你填的那張，欄位一次備齊</li>
+        <li>年度收支總表：每筆案子記一行，自動彙總可退稅估算</li>
+        <li>9B 稿費 18 萬免稅額追蹤表</li>
+      </ul>
+    </div>
+    <div class="buy">
+      <div class="price">NT$ 290 <small>一次買斷，2027 年費率免費更新</small></div>
+      <a class="btn" id="buy" href="https://peterleaf8.gumroad.com/l/tw-freelance-pack" target="_blank" rel="noopener">取得範本包</a>
+      <span class="hint">Excel、Google 試算表、Numbers 都能開。</span>
+    </div>
+  </div>
+
+  <section class="info">
+    <h2>常見問題</h2>
+    <div>
+      <details><summary>我的案子該算 9A 還是 9B？</summary><p>看發案方給你的勞務報酬單或扣繳憑單上的代號。一般設計、程式、攝影接案多半是 9A；稿費、翻譯、演講鐘點費多半是 9B；和對方有僱傭關係的臨時工作是 50。</p></details>
+      <details><summary>分成兩次請款就不用扣了嗎？</summary><p>如果案子本來就分期交付、分期付款，每一期各自計算是正常做法。但為了避開門檻而刻意拆單，可能被國稅局或健保署認定為同一筆給付，不建議這樣做。</p></details>
+      <details><summary>被扣的 10% 要怎麼拿回來？</summary><p>每年五月申報綜合所得稅時，扣繳稅額會抵減你的應納稅額。如果全年所得不高，扣繳的稅常常可以退回一部分或全部。</p></details>
+      <details><summary>我已經在發案公司投保了，還算兼職所得嗎？</summary><p>不算。在同一家公司投保的受僱者，獎金和薪資的補充保費另有規定，本工具的 50 類別只適用於沒有在該單位投保的兼職人員。</p></details>
+    </div>
+  </section>
+
+
+<footer class="foot">
+  <span>所有試算都在你的瀏覽器裡完成，不會上傳任何數字。結果依 2026 年 10 月的公開規定計算，僅供參考，實際金額以扣繳單位與主管機關認定為準。</span>
+  <span>依據：財政部各類所得扣繳率標準、薪資所得扣繳辦法；衛福部中央健康保險署投保金額分級表與補充保險費規定；勞動部勞保、勞退分級表與最低工資公告。</span>
+</footer>
+</div>
+<script src="../assets/tw.js"></script>
+<script src="../assets/ui.js"></script>
+<script src="../assets/freelance.js" defer></script>
+</body>
+</html>

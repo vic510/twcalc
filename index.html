@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>twcalc 台灣試算</title>
+<meta name="description" content="台灣人常用的薪資、接案、獎金與租金試算小工具：勞健保自付額、接案實拿、年終補充保費、房東租金扣繳。免費使用，資料只在瀏覽器裡運算。">
+<link rel="canonical" href="https://vic510.github.io/twcalc/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="twcalc 台灣試算">
+<meta property="og:description" content="台灣人常用的薪資、接案、獎金與租金試算小工具：勞健保自付額、接案實拿、年終補充保費、房東租金扣繳。免費使用，資料只在瀏覽器裡運算。">
+<meta property="og:url" content="https://vic510.github.io/twcalc/">
+<meta property="og:locale" content="zh_TW">
+<meta name="theme-color" content="#1B2B4B">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231B2B4B'/%3E%3Ctext x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='monospace'%3Etw%3C/text%3E%3C/svg%3E">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('twcalc-theme')||'light'}catch(e){document.documentElement.dataset.theme='light'}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@700&family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "twcalc 台灣試算", "url": "https://vic510.github.io/twcalc/", "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "inLanguage": "zh-Hant-TW", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TWD"}, "description": "台灣人常用的薪資、接案、獎金與租金試算小工具：勞健保自付額、接案實拿、年終補充保費、房東租金扣繳。免費使用，資料只在瀏覽器裡運算。"}</script>
+</head>
+<body>
+<div class="wrap">
+<nav class="nav" aria-label="主要">
+  <a class="brand" href=""><b>twcalc</b><span>台灣試算</span></a>
+  <div class="nav-r"><div class="links"><a href="" aria-current="page" class="keep">首頁</a><a href="freelance/">接案實拿</a><a href="payroll/">勞健保</a><a href="bonus/">年終獎金</a><a href="rent/">租金</a></div><button class="theme" id="theme" type="button"></button></div>
+</nav>
+  <header class="hero">
+    <div class="eyebrow">免費・不用註冊・資料不上傳</div>
+    <h1><span class="nw">薪水、接案、獎金、租金，</span><span class="nw">到手到底多少？</span></h1>
+    <p class="lede">台灣的扣繳和健保規則很瑣碎。這裡把常用的幾種試算做成小工具，輸入一個數字，就能看到每一筆扣款從哪裡來。</p>
+  </header>
+
+  <div class="tools">
+    <a class="tool" href="payroll/">
+      <span class="tag">上班族</span>
+      <h3>勞健保自付額試算</h3>
+      <p>月薪扣掉勞保、健保、勞退自提後實領多少，公司又幫你付了多少。</p>
+      <span class="q">月薪 40,000 → 實領 38,376</span>
+      <span class="go">開始試算 →</span>
+    </a>
+    <a class="tool" href="freelance/">
+      <span class="tag">接案者</span>
+      <h3>接案實拿試算</h3>
+      <p>報價會被扣多少稅和補充保費，也能反推想實拿多少該怎麼報價。</p>
+      <span class="q">報價 30,000 → 實拿 26,367</span>
+      <span class="go">開始試算 →</span>
+    </a>
+    <a class="tool" href="bonus/">
+      <span class="tag">年終獎金</span>
+      <h3>年終獎金補充保費試算</h3>
+      <p>全年獎金超過投保金額 4 倍就要扣 2.11%。看這筆年終會不會被扣、扣多少。</p>
+      <span class="q">投保 40,100 × 4 = 160,400 門檻</span>
+      <span class="go">開始試算 →</span>
+    </a>
+    <a class="tool" href="rent/">
+      <span class="tag">房東</span>
+      <h3>房東租金扣繳試算</h3>
+      <p>房子租給公司每月實收多少，全年要報多少租賃所得。</p>
+      <span class="q">月租 25,000 → 實收 21,972</span>
+      <span class="go">開始試算 →</span>
+    </a>
+  </div>
+
+  <section class="info">
+    <h2>需要整套表格？</h2>
+    <div class="packs">
+      <div class="packcard">
+        <h3>接案者全套 Excel 範本包</h3>
+        <p>報價單、請款單、勞務報酬單、年度收支表、9B 免稅額追蹤。扣繳與補充保費都寫進公式。</p>
+        <div class="row2"><span class="p">NT$ 290</span><a class="btn" href="https://peterleaf8.gumroad.com/l/tw-freelance-pack" target="_blank" rel="noopener">查看範本包</a></div>
+      </div>
+      <div class="packcard">
+        <h3>商品上架營運包</h3>
+        <p>給小店經營者的繁中工作簿：商品主檔、補貨規劃、供應商交接、問題追蹤與上架前檢查清單。</p>
+        <div class="row2"><span class="p">NT$ 390</span><a class="btn" href="https://peterleaf8.gumroad.com/l/tw-shop-listing-pack" target="_blank" rel="noopener">查看營運包</a></div>
+      </div>
+    </div>
+  </section>
+
+<footer class="foot">
+  <span>所有試算都在你的瀏覽器裡完成，不會上傳任何數字。結果依 2026 年 10 月的公開規定計算，僅供參考，實際金額以扣繳單位與主管機關認定為準。</span>
+  <span>依據：財政部各類所得扣繳率標準、薪資所得扣繳辦法；衛福部中央健康保險署投保金額分級表與補充保險費規定；勞動部勞保、勞退分級表與最低工資公告。</span>
+</footer>
+</div>
+<script src="assets/tw.js"></script>
+<script src="assets/ui.js"></script>
+<script src="assets/home.js" defer></script>
+</body>
+</html>

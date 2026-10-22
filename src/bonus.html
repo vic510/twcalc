@@ -1,0 +1,67 @@
+  <header class="hero">
+    <div class="eyebrow">年終・三節・績效獎金</div>
+    <h1><span class="nw">年終領三個月，</span><span class="nw">會被扣補充保費嗎？</span></h1>
+    <p class="lede">同一家公司發的獎金，全年累計超過<b>健保投保金額 4 倍</b>的部分，要扣 <b>2.11%</b> 補充保費。輸入投保金額和獎金，看這筆會扣多少。</p>
+  </header>
+
+  <div class="main">
+    <form class="panel" id="form" autocomplete="off">
+      <div class="field">
+        <label class="label" for="salary">每月薪資</label>
+        <div class="money"><span>NT$</span><input id="salary" inputmode="numeric" value="40,000" aria-describedby="salary-h"></div>
+        <div class="hint" id="salary-h">用來對照健保投保金額。若薪資單上有寫投保金額，直接勾下面的選項填入更準。</div>
+      </div>
+      <label class="check"><input type="checkbox" id="known"> <span>我知道自己的健保投保金額</span></label>
+      <div class="field" id="ins-f" hidden>
+        <label class="label" for="ins">健保投保金額</label>
+        <div class="money sm"><span>NT$</span><input id="ins" inputmode="numeric" value="40,100"></div>
+      </div>
+
+      <div class="field">
+        <label class="label" for="bonus">這次要發的獎金</label>
+        <div class="money"><span>NT$</span><input id="bonus" inputmode="numeric" value="150,000"></div>
+      </div>
+      <div class="field">
+        <label class="label" for="before">今年同一家公司已經發過的獎金</label>
+        <div class="money sm"><span>NT$</span><input id="before" inputmode="numeric" value="40,000"></div>
+        <div class="hint">三節獎金、績效獎金、分紅等都要加總。每年 1 月 1 日重新累計。</div>
+      </div>
+    </form>
+
+    <div class="side">
+      <div class="slip" aria-live="polite">
+        <div class="slip-head"><h2>獎金補充保費</h2><span class="code" id="slip-code"></span></div>
+        <div class="rows">
+          <div class="row"><span class="k">本次獎金</span><span class="v" id="o-bonus"></span></div>
+          <div class="row sub"><span class="k">全年免扣額度（投保金額 × 4）</span><span class="v" id="o-cap"></span></div>
+          <div class="row sub"><span class="k">本次發放前剩餘額度</span><span class="v" id="o-room"></span></div>
+          <div class="row sub"><span class="k">超過額度、要計費的部分</span><span class="v" id="o-over"></span></div>
+          <div class="row minus"><span class="k">補充保費</span><span class="v" id="o-prem"></span><span class="why" id="o-why"></span></div>
+        </div>
+        <div class="net"><span class="netl"><span class="stamp" id="stamp" aria-hidden="true">實領</span><span class="k">扣保費後</span></span><span class="v" id="o-net"></span></div>
+      </div>
+      <div class="alert" id="tip" hidden></div>
+      <div class="actions">
+        <button class="btn" type="button" id="copy">複製試算明細</button>
+        <span class="toast" id="toast" role="status"></span>
+      </div>
+    </div>
+  </div>
+
+  <section class="info">
+    <h2>幾個容易搞錯的地方</h2>
+    <div class="grid3">
+      <div class="card"><h3>4 倍是「全年累計」</h3><p>不是每次各算 4 倍。年初發的三節獎金會先用掉額度，到了年終才一次超過。</p></div>
+      <div class="card"><h3>看發放當月的投保金額</h3><p>門檻用「發獎金那個月」的健保投保金額乘 4。年中調薪後，門檻也會跟著變。</p></div>
+      <div class="card"><h3>這筆不是所得稅</h3><p>補充保費是健保費，報稅時不會退。年終獎金另外還可能被扣 5% 所得稅，那是另一筆。</p></div>
+    </div>
+  </section>
+
+  <section class="info">
+    <h2>常見問題</h2>
+    <div>
+      <details><summary>換工作後，前一家公司發的獎金要算進去嗎？</summary><p>不用。4 倍門檻是以同一個投保單位計算，換到新公司就重新累計。</p></details>
+      <details><summary>年終獎金會被扣所得稅嗎？</summary><p>非每月給付的獎金，單次給付達 90,501 元（2026 年）時，公司會先扣 5% 所得稅，報稅時再結算。這和補充保費是兩筆不同的扣款。</p></details>
+      <details><summary>員工酬勞配股也算嗎？</summary><p>算。以股票發放的員工酬勞同樣列入獎金累計，計費金額依健保署規定的價值認定。</p></details>
+    </div>
+  </section>
