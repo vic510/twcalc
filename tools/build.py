@@ -5,8 +5,8 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 BASE = "https://vic510.github.io/twcalc/"
 PACK_FREELANCE = "https://peterleaf8.gumroad.com/l/tw-freelance-pack"
 PACK_SHOP = "https://peterleaf8.gumroad.com/l/tw-shop-listing-pack"
-PACK_LANDLORD = ""   # 上架後填入 Gumroad 連結
-PACK_PAYROLL = ""    # 上架後填入 Gumroad 連結
+PACK_LANDLORD = "https://peterleaf8.gumroad.com/l/tw-landlord-pack"
+PACK_PAYROLL = "https://peterleaf8.gumroad.com/l/tw-payroll-check"
 PACK_DIVIDEND = ""   # 上架後填入 Gumroad 連結
 
 
