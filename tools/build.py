@@ -7,7 +7,7 @@ PACK_FREELANCE = "https://peterleaf8.gumroad.com/l/tw-freelance-pack"
 PACK_SHOP = "https://peterleaf8.gumroad.com/l/tw-shop-listing-pack"
 PACK_LANDLORD = "https://peterleaf8.gumroad.com/l/tw-landlord-pack"
 PACK_PAYROLL = "https://peterleaf8.gumroad.com/l/tw-payroll-check"
-PACK_DIVIDEND = ""   # 上架後填入 Gumroad 連結
+PACK_DIVIDEND = "https://peterleaf8.gumroad.com/l/tw-dividend-pack"
 
 
 def buy(url, label):
