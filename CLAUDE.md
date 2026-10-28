@@ -6,4 +6,4 @@
 - 所有費率、分級表與試算函式都在 `assets/tw.js`。改完一定要跑 `node tests/tw.test.mjs`。
 - Gumroad 商品連結在 `tools/build.py` 的 `PACK_*` 常數；留空時網站顯示「即將上架」。
 
-付費商品、產生程式與完整交接說明在私人 repo `vic510/twcalc-products`，請讀它的 `CLAUDE.md`。**那個 repo 的任何檔案都不能放進這裡**，這個 repo 是公開的。
+付費商品、產生程式與完整交接說明在私人 repo `vic-gx/twcalc-products`（2026-10-25 從 vic510 搬到 organization vic-gx），請讀它的 `CLAUDE.md`。**那個 repo 的任何檔案都不能放進這裡**，這個 repo 是公開的。
